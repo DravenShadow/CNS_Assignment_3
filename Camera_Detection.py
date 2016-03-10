@@ -20,16 +20,19 @@ def main():
     """
     cap = cv2.VideoCapture(0)
 
-    turn_msgbox_on = validate(raw_input('Enter the check frequency for camera detection (Seconds): '))
+    turn_msgbox_on = validate_secs(raw_input('Enter the check frequency for camera detection (Seconds): '))
 
     while True:
         time.sleep(float(turn_msgbox_on))
         if cap.open(0):
             msgbox('YOUR CAMERA HAS BEEN TURNED ON', 'Camera Detection')
-            turn_msgbox_on = validate(raw_input('Re-Enter the check frequency for camera detection (Seconds): '))
+            user_input = raw_input('Do you wish to keep it on? (Y or N): ')
+
+            if user_input == 'n' or user_input == 'n':
+                cap.release()
 
 
-def validate(user_input):
+def validate_secs(user_input):
     """
     A validation method to make sure the user has inputted a number greater than 0 seconds
     :param user_input:
